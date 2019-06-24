@@ -83,6 +83,9 @@ namespace PurchaseREST.Controllers
 
                     };
                     pc.Add(newPurchase);
+                    pc.SaveChanges();
+
+                    return Json(new { purchaseid = newPurchase.PurchaseId });
                 }
                 else
                 {
@@ -91,10 +94,13 @@ namespace PurchaseREST.Controllers
                     editPurchase.Date = purchase.date;
                     editPurchase.Details = purchase.details;
                     editPurchase.Price = priceDecimal;
+                    pc.SaveChanges();
+
+                    return Json(new { purchaseid = purchase.purchaseid });
                 }
-                pc.SaveChanges();
             }
-                 return Json(new { message = "ok"});
+            return Json(new { purchaseid = 0 });
+
         }
 
         [Route("deletepurchase")]
